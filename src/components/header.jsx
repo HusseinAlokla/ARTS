@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../CSS/Header.css'; // Create a separate CSS file for styling
+import { Pi } from 'react-icons/md';
+
 import { PiCarSimpleBold } from "react-icons/pi";
 
 const Header = () => {
