@@ -1,0 +1,90 @@
+/* Header.css */
+
+/* Common styles for both mobile and desktop */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  /* Mobile styles */
+  nav {
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    color: white;
+    position: absolute;
+    top: 60px; /* Adjust the top position based on your header height */
+    right: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Keep column layout for mobile */
+  }
+  
+  nav ul li {
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+  
+  .menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+  }
+  
+  /* Media query for screens up to 768px width (mobile) */
+  @media (max-width: 768px) {
+    nav {
+      width: 100%;
+    }
+  
+    nav.nav-drawer-open {
+      transform: translateX(0);
+    }
+  
+    .menu-icon {
+      display: block;
+    }
+  }
+  
+  /* Media query for screens larger than 768px width (desktop) */
+  @media (min-width: 769px) {
+    nav ul {
+        flex-direction: row; /* Set to row for desktop */
+      }
+    nav {
+      flex-direction: row; /* Set to row to make links appear side by side on desktop */
+      position: static; /* Reset the position for larger screens */
+      width: auto;
+      transform: none; /* Reset the transform */
+      transition: none; /* Reset the transition */
+    }
+  
+
+  
+    nav ul li {
+      margin-right: 1rem; /* Adjust spacing between navigation items on desktop */
+      margin-bottom: 0; /* Reset margin-bottom */
+    }
+  
+    .menu-icon {
+      display: none; /* Hide the menu icon on desktop */
+    }
+  }
+  
