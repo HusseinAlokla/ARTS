@@ -19,37 +19,39 @@ const haversine = (lat1, lon1, lat2, lon2) => {
   return distance;
 };
 const placeCoordinates = {
-  'New York': { lat: 40.7128, lon: -74.0060 },
-  'Los Angeles': { lat: 34.0522, lon: -118.2437 },
-  'Chicago': { lat: 41.8781, lon: -87.6298 },
-  'San Francisco': { lat: 37.7749, lon: -122.4194 },
-  'Seattle': { lat: 47.6062, lon: -122.3321 },
-  'Miami': { lat: 25.7617, lon: -80.1918 },
-  'Denver': { lat: 39.7392, lon: -104.9903 },
-  'Austin': { lat: 30.2500, lon: -97.7500 },
-  'Boston': { lat: 42.3601, lon: -71.0589 },
-  'Atlanta': { lat: 33.7490, lon: -84.3880 },
-  'Dallas': { lat: 32.7767, lon: -96.7970 },
-  'Phoenix': { lat: 33.4484, lon: -112.0740 },
-  'Toronto': { lat: 43.6532, lon: -79.3832 },
-  'London': { lat: 51.5099, lon: -0.1180 },
-  'Riyadh': { lat: 24.7136, lon: 46.6753 }, 
-  'Cairo': { lat: 30.0444, lon: 31.2357 },  
-  'Baghdad': { lat: 33.3152, lon: 44.3661 }, 
-  'Amman': { lat: 31.9454, lon: 35.9284 },   
-  'Kuwait City': { lat: 29.3759, lon: 47.9774 },   
-  'Beirut': { lat: 33.8889, lon: 35.4944 }, 
-  'Muscat': { lat: 23.6100, lon: 58.5400 },
-   'Doha': { lat: 25.2769, lon: 51.5200 },  
-   'Rabat': { lat: 34.0209, lon: -6.8417 }, 
-  'Tunis': { lat: 36.8065, lon: 10.1815 }, 
-  'Abu Dhabi': { lat: 24.4667, lon: 54.3667 },
-  'Sanaa': { lat: 15.3694, lon: 44.1910 },
+  'Miniyeh': { lat: 34.475417, lon: 35.926515},
+  'Al Beddaaoui': { lat: 34.449977, lon: 35.859591 },
+  'Jamal Abdul Nasser Hwy': { lat:34.428690, lon:  35.815212 },
+  'Coastal Hwy Tripoli': { lat: 34.410910,lon: 35.820899 },
+  'Tripoli-Btaroun Hwy': { lat:34.408534, lon :35.820292 },
+  'Anfe': { lat: 34.360436,lon: 35.745253 },
+  'Chekka': { lat: 34.329701,lon: 35.735693 },
+  'Deir Nourieh': { lat: 34.281131, lon:35.695145 },
+  'Batroun': { lat: 34.266383, lon:35.670972 },
+  'Batroun-jbeil Hwy': { lat: 34.244946,lon: 35.664939 },
+  'fghal': { lat: 34.209428, lon: 35.650684 },
+  'Amchit': { lat: 34.145620, lon: 35.634580 },
+  'Jbeil-Jounieh': { lat: 34.117847, lon:35.651587 },
+  'Halat': { lat: 34.073298,lon: 35.645070 },
+  'Ghazir': { lat:34.013054, lon:35.648120 }, 
+  'Zouq Mosbeh': { lat: 33.961890, lon:35.604814 },  
+  'Dbayeh': { lat: 33.927259, lon:35.587453 }, 
+  'Pierre Gemayel': { lat: 33.897154,lon: 35.536265 },   
+  'General DE Gaulle': { lat: 33.898687, lon:35.470829 },   
+  'Beirut-Saida Hwy': { lat:33.811359, lon:35.482374 }, 
+  'Saida-Tyre Hwy': { lat: 33.551667, lon:35.378052 },
+   'Sarafand': { lat: 33.461150,lon: 35.316662 },  
+   'El-Buss': { lat: 33.270100, lon:35.214592}, 
+  'Tyre-Naqoura Hwy': { lat: 33.196376,lon: 35.205119}, 
+  'Burj El Naqoura': { lat:33.102940,lon: 35.108453 },
+ 
   
 };
 
     const RouteSelector = () => {
           const { register, handleSubmit: tollCalculatorSubmit } = useForm();
+          const [sourceCity, setSourceCity] = useState('');
+          const [destinationCity, setDestinationCity] = useState('');
           const [distance, setDistance] = useState(null);
           const [carType, setCarType] = useState('');
           const [tollRate, setTollRate] = useState({
@@ -98,7 +100,7 @@ const placeCoordinates = {
                 <div>
                 <label>
             Source City:
-            <select {...register('sourceCity')} required>
+            <select {...register('sourceCity')}onChange={(e) => setSourceCity(e.target.value)} required>
               {Object.keys(placeCoordinates).map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
@@ -106,7 +108,7 @@ const placeCoordinates = {
           </label>
           <label>
             Destination City:
-            <select {...register('destinationCity')} required>
+            <select {...register('destinationCity')} onChange={(e) => setDestinationCity(e.target.value)} required>
               {Object.keys(placeCoordinates).map(city => (
                 <option key={city} value={city}>{city}</option>
               ))}
@@ -136,7 +138,7 @@ const placeCoordinates = {
               {distance !== null && (
           <div>
             <h2>Calculated Distance:</h2>
-            <p>{`The distance between the two places is ${distance.toFixed(2)} km.`}</p>
+            <p>{`The distance between ${sourceCity} and ${destinationCity} is ${distance.toFixed(2)} km.`}</p>
             {totalToll !== null && (
               <p>{`The total toll for the trip is $${totalToll.toFixed(2)}.`}</p>
             )}
